@@ -3,7 +3,6 @@ import PlanForm from "./PlanForm";
 import DeductAmountForm from "./DeductAmountForm";
 import DeclarationForm from "./DeclarationForm";
 import ProgressBar from "../common/ProgressBar";
-import Button from "react-bootstrap/Button";
 import InsuranceFormContext from "../../context/insuranceFormContext";
 import FormPreview from "./FormPreview";
 import Row from "react-bootstrap/Row";
@@ -22,7 +21,7 @@ const InsuranceForm = (props) => {
     pincode: "560076",
     state: "Karnataka",
     plan: "One (Individual)",
-    deductibleAmount: "",
+    deductibleAmount: 200_000,
     deductAmountCheckbox: false,
     decCheckBox1: false,
     decCheckBox2: false,
@@ -30,7 +29,7 @@ const InsuranceForm = (props) => {
     decCheckBox4: false,
   });
 
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(2);
 
   const planList = ["One (Individual)", "Pro (Individual)"];
 

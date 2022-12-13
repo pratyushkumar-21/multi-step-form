@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import BackArrow from "../common/BackArrow";
 import CustomCheckBox from "../common/CustomCheckBox";
+import CustomRangeSlider from "../common/CustomRangeSlider";
 
 const DeductAmountForm = (props) => {
   const {
@@ -39,8 +40,22 @@ const DeductAmountForm = (props) => {
               </Card.Header>
               <Card.Body>
                 <p>
-                  Sum insured of Rs 20,00,000 with a deductible of Rs 3,00,000
+                  Sum insured of ₹20,00,000 with a deductible of{" "}
+                  <strong>₹{deductibleAmount}</strong>
                 </p>
+                <Row>
+                  <Col>
+                    <CustomRangeSlider
+                      min={1_00_000}
+                      max={5_00_000}
+                      value={deductibleAmount}
+                      step={10_000}
+                      rangeSymbol="₹"
+                      name="deductibleAmount"
+                      onChange={handleInputChange}
+                    />
+                  </Col>
+                </Row>
               </Card.Body>
             </Card>
           </Col>
@@ -50,7 +65,7 @@ const DeductAmountForm = (props) => {
           <Col>
             <CustomCheckBox
               type="checkbox"
-              label="I understand that this insurance will not be utilized until ₹3,00,000 (deductible) is exhausted."
+              label={`I understand that this insurance will not be utilized until ₹${deductibleAmount}(deductible) is exhausted.`}
               name="deductAmountCheckbox"
               checked={deductAmountCheckbox}
               onChange={handleCheckBoxChange}

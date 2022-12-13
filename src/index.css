@@ -9,7 +9,7 @@ body{
 .bar{
     background-color: #CCC4BA;
     height: 8px;
-    width: 33%;
+    width: 100%;
     margin-left: 6px;
     margin-right: 6px;
 }
@@ -74,4 +74,14 @@ body{
     padding: 20px;
     background-color:#E5E1DC;
     cursor: pointer;
+}
+
+.custom-slider-input{
+    width: 100%;
+    border-radius: 10px;
+}
+
+.range-slider-data-indicator-wrapper{
+    display: flex;
+    justify-content: space-between;
 }
