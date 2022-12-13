@@ -1,6 +1,7 @@
 import React from "react";
+import Error from "./Error";
 
-const CustomCheckBox = ({ label, name, ...rest }) => {
+const CustomCheckBox = ({ error, label, name, ...rest }) => {
   return (
     <div className="form-check">
       <input
@@ -10,9 +11,12 @@ const CustomCheckBox = ({ label, name, ...rest }) => {
         name={name}
         {...rest}
       />
+
       <label className="form-check-label" htmlFor={name}>
         {label}
       </label>
+
+      {error && <Error error={error} />}
     </div>
   );
 };

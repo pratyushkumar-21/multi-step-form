@@ -11,17 +11,24 @@ import Container from "react-bootstrap/Container";
 import FormFooter from "./FormFooter";
 import PaymentPage from "./PaymentPage";
 import CongratulationPage from "./CongratulationPage";
+import {
+  planFormSchema,
+  declarationFormSchema,
+  deductAmountFormSchema,
+} from "../../validations/insuranceFormValidationSchema";
 
 const InsuranceForm = (props) => {
+  const [step, setStep] = useState(1);
+
   const [formData, setFormData] = useState({
-    email: "prkusdi@gmail.com",
-    number: "9304138832",
-    address1: "Aecs layout",
+    email: "test@gmail.com",
+    number: "9876543210",
+    address1: "aecs layout",
     address2: "bangalore",
     pincode: "560076",
-    state: "Karnataka",
-    plan: "One (Individual)",
-    deductibleAmount: 200_000,
+    state: "karnataka",
+    plan: "",
+    deductibleAmount: 2_00_000,
     deductAmountCheckbox: false,
     decCheckBox1: false,
     decCheckBox2: false,
@@ -29,9 +36,66 @@ const InsuranceForm = (props) => {
     decCheckBox4: false,
   });
 
-  const [step, setStep] = useState(2);
+  const [errors, setErrors] = useState({});
 
   const planList = ["One (Individual)", "Pro (Individual)"];
+
+  const handleInputChange = (event) => {
+    setFormData((formData) => ({
+      ...formData,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  const handleCheckBoxChange = (event) => {
+    setFormData((formData) => ({
+      ...formData,
+      [event.target.name]: event.target.checked,
+    }));
+  };
+
+  const handleBack = (e) => {
+    setStep((step) => step - 1);
+  };
+
+  const validateForm = (formTypeSchema) => {
+    return formTypeSchema
+      .validate(formData, { abortEarly: false })
+      .then((valid) => {
+        setErrors({});
+        return true;
+      })
+      .catch((err) => {
+        const errorsData = {};
+
+        err.errors.forEach((error, index) => {
+          errorsData[err.inner[index].path] = error;
+        });
+
+        setErrors(errorsData);
+        return false;
+      });
+  };
+
+  const handleNext = async (e) => {
+    let isValid = false;
+    switch (step) {
+      case 1:
+        isValid = await validateForm(planFormSchema);
+        break;
+      case 2:
+        isValid = await validateForm(deductAmountFormSchema);
+        break;
+      case 3:
+        isValid = await validateForm(declarationFormSchema);
+        break;
+      case 4:
+        isValid = true;
+        break;
+    }
+
+    if (isValid) setStep((step) => step + 1);
+  };
 
   const renderForm = () => {
     switch (step) {
@@ -48,53 +112,37 @@ const InsuranceForm = (props) => {
     }
   };
 
-  const handleInputChange = (event) => {
-    setFormData((formData) => ({
-      ...formData,
-      [event.target.name]: event.target.value,
-    }));
-  };
-
-  const handleCheckBoxChange = (event) => {
-    setFormData((formData) => ({
-      ...formData,
-      [event.target.name]: event.target.checked,
-    }));
-  };
-
-  const handleNext = (e) => {
-    setStep((step) => step + 1);
-  };
-
-  const handleBack = (e) => {
-    setStep((step) => step - 1);
-  };
-
   return (
     <InsuranceFormContext.Provider
-      value={{ formData, handleInputChange, handleBack, handleCheckBoxChange }}
+      value={{
+        formData,
+        handleInputChange,
+        handleBack,
+        handleCheckBoxChange,
+        errors,
+      }}
     >
-      <div>
-        <Row className="header">
-          <ProgressBar numberOfBars={4} active={step} />
+      <Row>
+        <ProgressBar numberOfBars={4} active={step} />
+      </Row>
+
+      <Container className="form-body">
+        <Row>
+          <Col>{renderForm()}</Col>
+          {step < 4 ? (
+            <Col>
+              <FormPreview />
+            </Col>
+          ) : null}
         </Row>
-        <Container className="form-body">
-          <Row>
-            <Col>{renderForm()}</Col>
-            {step < 4 ? (
-              <Col>
-                <FormPreview />
-              </Col>
-            ) : null}
-          </Row>
-        </Container>
-        {step < 5 ? (
-          <FormFooter
-            onClick={handleNext}
-            buttonLabel={step < 4 ? "next" : "submit"}
-          />
-        ) : null}
-      </div>
+      </Container>
+
+      {step < 5 ? (
+        <FormFooter
+          onClick={handleNext}
+          buttonLabel={step < 4 ? "next" : "submit"}
+        />
+      ) : null}
     </InsuranceFormContext.Provider>
   );
 };

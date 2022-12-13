@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Container from "react-bootstrap/Container";
 import InsuranceFormContext from "../../context/insuranceFormContext";
@@ -9,22 +10,49 @@ const FormPreview = (props) => {
     formData: { email, number, address1, address2, pincode, state },
   } = useContext(InsuranceFormContext);
 
+  const formPreviewList = [
+    {
+      label: "Personal email address:",
+      value: email,
+    },
+    {
+      label: "Mobile number:",
+      value: number,
+    },
+    {
+      label: "Address Line 01:",
+      value: address1,
+    },
+    {
+      label: "Address Line 02:",
+      value: address2,
+    },
+    {
+      label: "Pincode",
+      value: pincode,
+    },
+    {
+      label: "State",
+      value: state,
+    },
+  ];
+
+  const renderFormPreviewData = () => {
+    return formPreviewList.map((data, index) => (
+      <Row key={index} className="mb-2">
+        <Col>{data.label}</Col>
+        <Col>
+          <strong>{data.value}</strong>
+        </Col>
+      </Row>
+    ));
+  };
+
   return (
-    <div>
-      <Card style={{ width: "352px" }}>
-        <Card.Header>Form preview</Card.Header>
-        <Card.Body>
-          <Container>
-            <Row>Personal email address: {email}</Row>
-            <Row>Mobile number: {number}</Row>
-            <Row>Address Line 01: {address1}</Row>
-            <Row>Address Line 02: {address2} </Row>
-            <Row>Pincode: {pincode}</Row>
-            <Row>State: {state}</Row>
-          </Container>
-        </Card.Body>
-      </Card>
-    </div>
+    <Card style={{ width: "352px" }}>
+      <Card.Header>Form preview</Card.Header>
+      <Card.Body>{renderFormPreviewData()}</Card.Body>
+    </Card>
   );
 };
 

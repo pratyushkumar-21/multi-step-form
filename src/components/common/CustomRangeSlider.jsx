@@ -1,6 +1,14 @@
 import React from "react";
+import Error from "./Error";
 
-const CustomRangeSlider = ({ value, min, max, rangeSymbol, ...rest }) => {
+const CustomRangeSlider = ({
+  error,
+  value,
+  min,
+  max,
+  rangeSymbol,
+  ...rest
+}) => {
   return (
     <div>
       <div>
@@ -13,16 +21,20 @@ const CustomRangeSlider = ({ value, min, max, rangeSymbol, ...rest }) => {
           className="custom-slider-input"
         />
       </div>
+
       <div className="range-slider-data-indicator-wrapper">
         <div>
           {rangeSymbol}
           {min}
         </div>
+
         <div>
           {rangeSymbol}
           {max}
         </div>
       </div>
+
+      {error && <Error error={error} />}
     </div>
   );
 };

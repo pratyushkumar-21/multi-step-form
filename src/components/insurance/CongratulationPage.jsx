@@ -8,6 +8,7 @@ const CongratulationPage = (props) => {
       <div>
         <FormHeader header="Congratulations!" />
       </div>
+
       <SelecetedPlanDetails />
     </div>
   );

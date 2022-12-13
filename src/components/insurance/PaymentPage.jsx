@@ -15,10 +15,12 @@ const PaymentPage = () => {
         <Col>
           <BackArrow onClick={handleBack} />
         </Col>
+
         <Col md={10}>
           <FormHeader header="Review and confirm payment" />
         </Col>
       </Row>
+
       <SelecetedPlanDetails />
     </div>
   );

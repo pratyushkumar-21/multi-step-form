@@ -10,6 +10,7 @@ import CustomCheckBox from "../common/CustomCheckBox";
 const DeclarationForm = (props) => {
   const {
     formData: { decCheckBox1, decCheckBox2, decCheckBox3, decCheckBox4 },
+    errors,
     handleBack,
     handleCheckBoxChange,
   } = useContext(InsuranceFormContext);
@@ -46,6 +47,7 @@ const DeclarationForm = (props) => {
       <Row key={data.name}>
         <Col>
           <CustomCheckBox
+            error={errors[data.name]}
             type="checkbox"
             label={data.label}
             name={data.name}
@@ -58,20 +60,18 @@ const DeclarationForm = (props) => {
   };
 
   return (
-    <div>
-      <Container>
-        <Row>
-          <Col>
-            <BackArrow onClick={handleBack} />
-          </Col>
-          <Col md={10}>
-            <FormHeader header="Declaration" />
-          </Col>
-        </Row>
+    <Container>
+      <Row>
+        <Col md={2}>
+          <BackArrow onClick={handleBack} />
+        </Col>
+        <Col md={10}>
+          <FormHeader header="Declaration" />
+        </Col>
+      </Row>
 
-        {renderDeclarations()}
-      </Container>
-    </div>
+      {renderDeclarations()}
+    </Container>
   );
 };
 

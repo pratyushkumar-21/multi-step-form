@@ -1,9 +1,11 @@
 import React from "react";
+import Error from "./Error";
 
 const CustomInputBox = ({ type = "text", name, label, error, ...rest }) => {
   return (
     <div className="form-group">
       <label htmlFor={name}>{label}</label>
+
       <input
         {...rest}
         name={name}
@@ -11,9 +13,8 @@ const CustomInputBox = ({ type = "text", name, label, error, ...rest }) => {
         className="form-control"
         type={type}
       />
-      <small id={name} className="form-text text-muted">
-        <p className="text-danger">{error}</p>
-      </small>
+
+      {error && <Error error={error} />}
     </div>
   );
 };

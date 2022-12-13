@@ -1,4 +1,5 @@
 import React from "react";
+import Error from "./Error";
 
 const CustomSelectBox = ({
   label,
@@ -11,17 +12,17 @@ const CustomSelectBox = ({
   return (
     <div className="form-group">
       <label htmlFor="{name}">{label}</label>
+
       <select className="form-control" id={name} {...rest} name={name}>
-        <option>{placeholder}</option>
+        <option value="">{placeholder}</option>
         {options.map((opt, index) => (
           <option key={index} value={opt}>
             {opt}
           </option>
         ))}
       </select>
-      <small id={name} className="form-text text-muted">
-        <p className="text-danger">{error}</p>
-      </small>
+
+      {error && <Error error={error} />}
     </div>
   );
 };
