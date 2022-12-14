@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Error from "./Error";
 
 const CustomCheckBox = ({ error, label, name, ...rest }) => {
@@ -21,4 +21,4 @@ const CustomCheckBox = ({ error, label, name, ...rest }) => {
   );
 };
 
-export default CustomCheckBox;
+export default memo(CustomCheckBox);

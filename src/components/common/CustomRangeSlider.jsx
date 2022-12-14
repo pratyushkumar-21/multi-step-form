@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Error from "./Error";
 
 const CustomRangeSlider = ({
@@ -39,4 +39,4 @@ const CustomRangeSlider = ({
   );
 };
 
-export default CustomRangeSlider;
+export default memo(CustomRangeSlider);

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -8,12 +8,22 @@ import InsuranceFormContext from "../../context/insuranceFormContext";
 import FormHeader from "./FormHeader";
 import CustomSelectBox from "../common/CustomSelectBox";
 
-const PlanForm = ({ planList }) => {
+const PlanForm = (props) => {
   const {
     formData: { email, number, address1, address2, pincode, state, plan },
     errors,
     handleInputChange,
   } = useContext(InsuranceFormContext);
+
+  const planList = useMemo(
+    () => [
+      "One (Individual)",
+      "Pro (Individual)",
+      "Plus (Individual + Individual)",
+      "Max (Floater)",
+    ],
+    []
+  );
 
   let inputBoxes = [
     {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 const BackArrow = ({ onClick }) => {
   return (
@@ -8,4 +8,4 @@ const BackArrow = ({ onClick }) => {
   );
 };
 
-export default BackArrow;
+export default memo(BackArrow);

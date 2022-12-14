@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Error from "./Error";
 
 const CustomInputBox = ({ type = "text", name, label, error, ...rest }) => {
@@ -19,4 +19,4 @@ const CustomInputBox = ({ type = "text", name, label, error, ...rest }) => {
   );
 };
 
-export default CustomInputBox;
+export default memo(CustomInputBox);

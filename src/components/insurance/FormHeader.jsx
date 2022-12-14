@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 const FormHeader = (props) => {
   const { header, subHeader } = props;
@@ -10,4 +10,4 @@ const FormHeader = (props) => {
   );
 };
 
-export default FormHeader;
+export default memo(FormHeader);

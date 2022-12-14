@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Error from "./Error";
 
 const CustomSelectBox = ({
@@ -27,4 +27,4 @@ const CustomSelectBox = ({
   );
 };
 
-export default CustomSelectBox;
+export default memo(CustomSelectBox);

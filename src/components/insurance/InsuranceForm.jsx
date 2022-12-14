@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import PlanForm from "./PlanForm";
 import DeductAmountForm from "./DeductAmountForm";
 import DeclarationForm from "./DeclarationForm";
@@ -38,25 +38,23 @@ const InsuranceForm = (props) => {
 
   const [errors, setErrors] = useState({});
 
-  const planList = ["One (Individual)", "Pro (Individual)"];
-
-  const handleInputChange = (event) => {
+  const handleInputChange = useCallback((event) => {
     setFormData((formData) => ({
       ...formData,
       [event.target.name]: event.target.value,
     }));
-  };
+  }, []);
 
-  const handleCheckBoxChange = (event) => {
+  const handleCheckBoxChange = useCallback((event) => {
     setFormData((formData) => ({
       ...formData,
       [event.target.name]: event.target.checked,
     }));
-  };
+  }, []);
 
-  const handleBack = (e) => {
+  const handleBack = useCallback((e) => {
     setStep((step) => step - 1);
-  };
+  }, []);
 
   const validateForm = (formTypeSchema) => {
     return formTypeSchema
@@ -100,7 +98,7 @@ const InsuranceForm = (props) => {
   const renderForm = () => {
     switch (step) {
       case 1:
-        return <PlanForm planList={planList} />;
+        return <PlanForm />;
       case 2:
         return <DeductAmountForm />;
       case 3:
