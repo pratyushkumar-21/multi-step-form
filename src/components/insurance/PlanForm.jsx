@@ -81,7 +81,7 @@ const PlanForm = ({ planList }) => {
       </Row>
 
       <Container>
-        <Row style={{ marginBottom: "24px" }}>
+        <Row className="mb-4">
           <Card style={{ width: "736px" }}>
             <Card.Header>
               <strong>Plan details</strong>
