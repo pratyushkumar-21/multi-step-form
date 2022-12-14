@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, memo } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
@@ -9,6 +9,21 @@ const FormPreview = (props) => {
   const {
     formData: { email, number, address1, address2, pincode, state },
   } = useContext(InsuranceFormContext);
+
+  return (
+    <FormPreviewMemo
+      email={email}
+      number={number}
+      address1={address1}
+      address2={address2}
+      pincode={pincode}
+      state={state}
+    />
+  );
+};
+
+const FormPreviewMemo = memo((props) => {
+  const { email, number, address1, address2, pincode, state } = props;
 
   const formPreviewList = [
     {
@@ -54,6 +69,6 @@ const FormPreview = (props) => {
       <Card.Body>{renderFormPreviewData()}</Card.Body>
     </Card>
   );
-};
+});
 
 export default FormPreview;

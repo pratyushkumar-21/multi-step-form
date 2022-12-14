@@ -29,11 +29,11 @@ const InsuranceForm = (props) => {
     state: "karnataka",
     plan: "",
     deductibleAmount: 2_00_000,
-    deductAmountCheckbox: false,
-    decCheckBox1: false,
-    decCheckBox2: false,
-    decCheckBox3: false,
-    decCheckBox4: false,
+    deductAmountCheckbox: true,
+    decCheckBox1: true,
+    decCheckBox2: true,
+    decCheckBox3: true,
+    decCheckBox4: true,
   });
 
   const [errors, setErrors] = useState({});

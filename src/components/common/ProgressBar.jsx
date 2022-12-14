@@ -18,4 +18,4 @@ const ProgressBar = (props) => {
   return <div className="progress-bar-container">{getDividers()}</div>;
 };
 
-export default ProgressBar;
+export default React.memo(ProgressBar);
